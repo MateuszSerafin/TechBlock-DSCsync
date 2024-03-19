@@ -1,0 +1,30 @@
+#TO JEST GLOWNY BOT ON POWINIEN BYC TYLKO JEDEN NA REDISIE
+#Token do bota
+token: 023048904823904XD
+
+#Co ma sie pokazywac w activity bota
+activity: Bot alpha 0.1
+
+#guild id
+guild: 804815871402704966
+
+perms:
+  #ID: permission
+  2312312312: test.test
+
+redis:
+  ip: 100.64.0.1
+  port: 6379
+  haslo: lubiecycki123
+
+wiadomosci:
+  dsc-sync-juzsynced-title: "Twoje konto jest juz z synchronizowane"
+  dsc-sync-juzsynced-description: "Twój nick w mc to %s" #%s zamieni nazwe usera na nick w mc
+  dsc-sync-makluczaleniejestsynced-title: "Jak chcesz kolego"
+  dsc-sync-makluczaleniejestsynced-description: "Wygenerowano nowy klucz wpisz **/discordsync %s** w czacie minecraft aby synchronizowac konto. (Stary klucz nie będzie działać)" #podobnie tutaj %s pokaze kod wiec jest wazny
+  dsc-sync-ostatnietap-title: "UGHH.. Jeszcze jeden etap"
+  dsc-sync-ostatnietap-description: "Wpisz **/discordsync %s** w czacie minecraft aby synchronizowac konto." #%s pokaze haslo
+  dsc-unsync-niejestsync-title: "Nie jestes zsynchronizowany :("
+  dsc-unsync-niejestssync-description: "Teoretycznie sukces! Nie jestes zsynchronizowany"
+  dsc-unsync-success-title: "Nie jestes zsynchronizowany :("
+  dsc-unsync-success-description: "Byłeś synchronizowany. Już nie jesteś :)"

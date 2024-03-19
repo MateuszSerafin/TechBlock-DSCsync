@@ -1,0 +1,81 @@
+#Tylko jeden proxy powinien mieć to jako true nie chciało mi sie tego robić w inny sposob. Maybe kiedys zbyt duzo jebania sie jezeli tylko to to ogarnie XD
+updatujpermisije: false
+
+redis:
+  ip: 100.64.0.1
+  port: 6379
+  haslo: lubiecycki123
+
+wiadomosci:
+  mc-sync-brakhasla: "&aNie podales hasła do komendy &c:("
+  mc-sync-zlewpisanynicklubhaslo: "&aNie posiadasz wygenerowanego kodu lub zle wpisales nick podczas generacji &c:( &rWygeneruj go na discordzie uzywajac /sync"
+  mc-sync-success: "&eTwoje konto zostalo poztywnie zsynchronizowane"
+  mc-sync-zlykod: "&aZle wpisany kod. &c:( &rWygeneruj nowy na discordzie uzywajac /sync lub sproboj jeszcze raz stargeo."
+
+
+#Tutaj sa configi od synchro czatu
+czatsynchro: false
+#Token do bota
+token: 023048904823904XD
+
+#Co ma sie pokazywac w activity bota
+activity:
+  #${players}, mozna dodac wiecej ale huj wie co tu powinno byc nie wiem moze byc nawet liczba wyslanych albo zsynchronizowanych graczy
+  #wiadomosci sie zmieniaja co 30 sekund
+  - "pierwsza wiadmomomomosc"
+  - "a jak pan jezus powiedzial"
+  - "na tym proxy jest ${players}"
+
+#guild id
+guild: 804815871402704966
+
+
+#id kanalu gdzie maja wiadomosci z tego podproxy isc
+msgchannelid:
+
+  #puste jezeli nie ma byc synchro czatu
+  lobby: 123341233123
+  innyposerver: 1233493534905340
+
+synchroczatuwiadomosci:
+  #todo dodac nie wiem np. zeby permisje ogarnialo ale narazie to tak aby bylo
+  #nie synced user user ${nick} ${message} ${server}
+  mctodscniesynced: "${nick}: ${message}"
+
+  #synced user ${dscmention}  ${nick} ${message} ${server}
+  mctodscsynced: "${dscmention}: ${message}"
+
+  #todo kiedys moze dodam role z dsc do tego typu ${highestrole} nwm
+  #nie synced user ${dscnick} ${message} ${server}
+  dsctomcniesynced: "&c[DSC]&r${dscnick}: ${message}"
+
+
+  #nie synced user ${dscnick} ${message}
+  dsctomcniesyncedunknownserver: "&c[DSC]&r${dscnick}: ${message}"
+
+  #default server
+  #synced user ${dscnick} ${mcnick} ${message}
+  dsctomcsyncedunknownserver: "&c[DSC]&r${dscnick}: ${message}"
+
+  #default server
+  #synced user ${dscnick} ${mcnick} ${message} ${server}
+  dsctomcsynced: "&c[DSC]&r${mcnick}: ${message}"
+
+  #${mcnick} ${server}
+  jointomcunsynced: "${mcnick} dołączył do servera ${server}"
+
+  #${mcnick} ${dscmention} ${server}
+  jointomcsynced: "${dscmention} dołaczył do servera ${server}"
+
+
+  #${mcnick} ${server} {previousserver}
+  changedserverunsynced: "${mcnick} przeszedł z ${server} ${previousserver}"
+
+  #${mcnick} ${server} {previousserver} ${dscmention}
+  changedserversynced: "${dscmention} przeszedł z ${server} ${previousserver}"
+
+  #${mcnick} ${server}
+  playerquitunsynced: "${mcnick} wyszedl z gry"
+
+  #${mcnick} ${dscmention} ${server}
+  playerquitsynced: "${dscmention} wyszedl z gry"

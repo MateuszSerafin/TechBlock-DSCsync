@@ -1,0 +1,52 @@
+#TO JEST GLOWNY BOT ON POWINIEN BYC TYLKO JEDEN NA REDISIE
+#Token do bota
+token: 023048904823904XD
+
+#Co ma sie pokazywac w activity bota
+activity: Bot alpha 0.1
+
+#guild id
+guild: 804815871402704966
+
+perms:
+  #ID: permission
+  2312312312: test.test
+
+redis:
+  ip: 100.64.0.1
+  port: 6379
+  haslo: lubiecycki123
+
+wiadomosci:
+  #todo dodac prawie wszystkie funkcje z tad narazie bare minumum https://autocode.com/tools/discord/embed-builder/
+
+
+  #todo mozna dodac dodatkowe opcje ofc
+  #${playernick} ${playeruuid}
+  dsc-sync-juzsynced:
+    title: "Twoje konto jest juz z synchronizowane"
+    description: "${playernick}"
+    thumbnail: "https://mc-heads.net/avatar/${playeruuid}"
+    image: "https://techblock.pl/storage/uploads/1665058313Optimized-background-SkyTech%20II.png"
+    color: "#ffffff"
+
+
+  #${klucz}, ${playernick}
+  dsc-sync-makluczaleniejestsynced:
+      #wpisz se opcje wyzej jakie chcesz title thumbnail image etc...
+      description: "tfuj nowy klucz to ${klucz}"
+
+  #${klucz} ${playernick}
+  dsc-sync-ostatnietap:
+    title: "UGHH.. Jeszcze jeden etap"
+    description: "wpisz ${klucz} w majkraft"
+    image: "https://techblock.pl/storage/uploads/1665058313Optimized-background-SkyTech%20II.png"
+
+
+  #nie ma zadnych opcji co ja mam tu dac xD
+  dsc-unsync-niejestsync:
+    title: "huehueuheu"
+
+  #${playernick} ${playeruuid}
+  dsc-unsync-success:
+    description: "tfuj nick był ${playernick}"
