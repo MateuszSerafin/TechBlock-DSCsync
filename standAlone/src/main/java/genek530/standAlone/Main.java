@@ -1,7 +1,5 @@
 package genek530.standAlone;
 
-
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.ToNumberPolicy;
@@ -33,33 +31,44 @@ public class Main {
 
     public static configWazparser conf;
 
-    public static Pyrite pyrite;
-
     public static Gson gson = new GsonBuilder().setNumberToNumberStrategy(ToNumberPolicy.LONG_OR_DOUBLE).create();
+
     public static void main(String[] args) {
-        initializeBulk();
+        try{
+            initConfig();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void initConfig() throws Exception {
+        File dataDir = Main.dataDir.toFile();
+        if(!dataDir.exists()){
+            dataDir.mkdir();
+        }
+        File config = new File(dataDir.toPath() + "/config.yml");
+        if(!config.exists()){
+            Files.copy(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("config.yml")), config.toPath());
+            throw new Exception("Standalone require first configuration please configure config.yml");
+        }
+
+        /*
+        //https://www.spigotmc.org/threads/cannot-use-shaded-snakeyaml-to-construct-class-object.136707/
+        Thread.currentThread().setContextClassLoader(Main.class.getClassLoader());
+         */
+        Yaml yaml = new Yaml(new Constructor(configWazparser.class));
+        conf = yaml.load(new UnicodeReader(new FileInputStream(config)));
+    }
+
+    private static void initData(){
+
     }
 
     private static void initializeBulk(){
         try{
-            File dataDir = Main.dataDir.toFile();
-            if(!dataDir.exists()){
-                dataDir.mkdir();
-            }
-            File config = new File(dataDir.toPath() + "/config.yml");
-            if(!config.exists()){
-                Files.copy(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("config.yml")), config.toPath());
-                throw new Exception("He he najpierw ustaw config od  TBDISCORDBOTa");
-            }
 
-            /*
-            //https://www.spigotmc.org/threads/cannot-use-shaded-snakeyaml-to-construct-class-object.136707/
-            Thread.currentThread().setContextClassLoader(Main.class.getClassLoader());
 
-             */
-
-            Yaml yaml = new Yaml(new Constructor(configWazparser.class));
-            conf = yaml.load(new UnicodeReader(new FileInputStream(config)));
 
             Data.initialize();
             discordContainer.initalize();

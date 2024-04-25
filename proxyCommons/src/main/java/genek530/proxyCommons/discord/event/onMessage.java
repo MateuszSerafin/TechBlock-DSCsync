@@ -1,6 +1,6 @@
 package genek530.proxyCommons.discord.event;
 
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.SynchronizedUser;
 import genek530.proxyCommons.Data;
 import genek530.proxyCommons.discord.messageHandler;
 import genek530.proxyCommons.discord.util.messageBuilder;
@@ -19,7 +19,7 @@ public class onMessage extends ListenerAdapter {
         if(!main.conf.getMsgchannelid().containsValue(event.getChannel().getIdLong())) return;
 
         String server = messageHandler.getServerFromID(event.getChannel().getIdLong());
-        sharedUser shrdUsr = Data.getsharedUser(event.getAuthor().getIdLong());
+        SynchronizedUser shrdUsr = Data.getsharedUser(event.getAuthor().getIdLong());
 
         if(server.equals("default")){
             if(shrdUsr == null){

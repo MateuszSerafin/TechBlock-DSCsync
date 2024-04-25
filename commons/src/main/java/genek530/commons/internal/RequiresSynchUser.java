@@ -1,6 +1,6 @@
 package genek530.commons.internal;
 
-public class authUser {
+public class RequiresSynchUser {
     //uzywane tylko do synchronizacji usera nie uzywac do niczego innego
 
     long discordID;
@@ -8,7 +8,7 @@ public class authUser {
 
     String password;
 
-    public authUser(long discordID, String mcnick, String password){
+    public RequiresSynchUser(long discordID, String mcnick, String password){
         this.discordID = discordID;
         this.mcNick = mcnick;
         this.password = password;

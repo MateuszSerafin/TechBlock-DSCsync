@@ -1,6 +1,6 @@
 package genek530.commons.redis;
 
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.SynchronizedUser;
 
 import java.util.List;
 import java.util.UUID;
@@ -12,11 +12,11 @@ public class sendMultiplePermsUpdate {
 
 
 
-    private sharedUser shrdusr;
+    private SynchronizedUser shrdusr;
     private List<String> permsList;
 
-    public sendMultiplePermsUpdate(sharedUser sharedUser, List<String> listapermisji){
-        this.shrdusr = sharedUser;
+    public sendMultiplePermsUpdate(SynchronizedUser SynchronizedUser, List<String> listapermisji){
+        this.shrdusr = SynchronizedUser;
         this.permsList = listapermisji;
     }
 
@@ -31,7 +31,7 @@ public class sendMultiplePermsUpdate {
 
     //shared User jest uzywany w ackAuthorization jest dodawany do Daty na standalonie
     //oraz tylko brac z niego UUID i inne rzeczy
-    public sharedUser getSharedUser(boolean wiemcorobie) {
+    public SynchronizedUser getSharedUser(boolean wiemcorobie) {
         return shrdusr;
     }
 }

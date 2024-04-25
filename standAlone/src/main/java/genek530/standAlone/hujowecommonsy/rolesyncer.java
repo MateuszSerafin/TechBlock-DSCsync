@@ -1,13 +1,5 @@
 package genek530.standAlone.hujowecommonsy;
 
-import genek530.commons.internal.sharedUser;
-import genek530.standAlone.Data;
-import genek530.standAlone.Main;
-import genek530.standAlone.discord.discordContainer;
-import org.jetbrains.annotations.Unmodifiable;
-
-import java.util.*;
-
 public class rolesyncer {
 
     /*

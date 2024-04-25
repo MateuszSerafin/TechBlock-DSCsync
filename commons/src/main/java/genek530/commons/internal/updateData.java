@@ -3,23 +3,23 @@ package genek530.commons.internal;
 import java.util.List;
 
 public class updateData {
-    private List<sharedUser> sharedUserList;
-    private List<authUser> authUserList;
+    private List<SynchronizedUser> synchronizedUserList;
+    private List<RequiresSynchUser> requiresSynchUserList;
     private List<String> whatPermstosendupadte;
 
-    public updateData(List<sharedUser> sharedUserList, List<authUser> authUserList, List<String> whatPermstosendupadte){
-        this.sharedUserList = sharedUserList;
-        this.authUserList = authUserList;
+    public updateData(List<SynchronizedUser> synchronizedUserList, List<RequiresSynchUser> requiresSynchUserList, List<String> whatPermstosendupadte){
+        this.synchronizedUserList = synchronizedUserList;
+        this.requiresSynchUserList = requiresSynchUserList;
         this.whatPermstosendupadte = whatPermstosendupadte;
     }
     public List<String> getWhatPermstosendupadte() {
         return whatPermstosendupadte;
     }
 
-    public List<authUser> getAuthUserList() {
-        return authUserList;
+    public List<RequiresSynchUser> getAuthUserList() {
+        return requiresSynchUserList;
     }
-    public List<sharedUser> getSharedUserList() {
-        return sharedUserList;
+    public List<SynchronizedUser> getSharedUserList() {
+        return synchronizedUserList;
     }
 }

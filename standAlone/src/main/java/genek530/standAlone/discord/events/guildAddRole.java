@@ -5,8 +5,7 @@ import genek530.commons.redis.sendPermUpdate;
 import genek530.commons.redis.validActions;
 import genek530.standAlone.Data;
 import genek530.standAlone.Main;
-import genek530.standAlone.hujowecommonsy.rolesyncer;
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.SynchronizedUser;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRoleAddEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -21,7 +20,7 @@ public class guildAddRole extends ListenerAdapter {
 
         long userID = event.getUser().getIdLong();
 
-        sharedUser shareduser = Data.getsharedUser(userID);
+        SynchronizedUser shareduser = Data.getsharedUser(userID);
         if(shareduser == null) return;
 
         List<Role> lista = event.getRoles();

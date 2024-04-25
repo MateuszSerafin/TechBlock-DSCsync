@@ -6,9 +6,7 @@ import genek530.standAlone.Data;
 import genek530.standAlone.Main;
 import genek530.standAlone.actions;
 import genek530.standAlone.discord.utils.baseEmbed;
-import genek530.standAlone.hujowecommonsy.rolesyncer;
-import genek530.commons.internal.sharedUser;
-import net.dv8tion.jda.api.EmbedBuilder;
+import genek530.commons.internal.SynchronizedUser;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 
 import java.util.HashMap;
@@ -16,7 +14,7 @@ import java.util.Map;
 
 public class unsync {
     public static void execute(SlashCommandInteractionEvent event){
-        sharedUser syncuser = Data.getsharedUser(event.getUser().getIdLong());
+        SynchronizedUser syncuser = Data.getsharedUser(event.getUser().getIdLong());
         if(syncuser == null){
             event.replyEmbeds(baseEmbed.build("dsc-unsync-niejestsync", new HashMap<>())).setEphemeral(true).queue();
             return;

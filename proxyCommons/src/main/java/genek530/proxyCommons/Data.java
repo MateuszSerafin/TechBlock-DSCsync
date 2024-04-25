@@ -1,10 +1,9 @@
 package genek530.proxyCommons;
 
-import genek530.commons.internal.authUser;
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.RequiresSynchUser;
+import genek530.commons.internal.SynchronizedUser;
 import genek530.commons.redis.sendMultiplePermsUpdate;
 import genek530.proxyCommons.utils.lputil;
-import net.luckperms.api.node.Node;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -14,13 +13,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Data {
     //Wszystkie pontuja do tego samego objektu tylko innny lookup
     //private bo pewnie bym kiedys cos spierdolil i zle sie odwoalal do tego
-    private static Map<Long, sharedUser> idlookup = new ConcurrentHashMap<>();
+    private static Map<Long, SynchronizedUser> idlookup = new ConcurrentHashMap<>();
 
     //Jest dla jajec ale lepiej nie uzywac
     @Deprecated
-    private static Map<String, sharedUser> nicklookup = new ConcurrentHashMap<>();
+    private static Map<String, SynchronizedUser> nicklookup = new ConcurrentHashMap<>();
 
-    private static Map<UUID, sharedUser> UUIDlookup = new ConcurrentHashMap<>();
+    private static Map<UUID, SynchronizedUser> UUIDlookup = new ConcurrentHashMap<>();
 
 
 
@@ -31,11 +30,11 @@ public class Data {
     public static Map<UUID, String> skipAdding = new HashMap<>();
     public static Map<UUID, String> skipRemoving = new HashMap<>();
 
-    public static void addUserAfterSync(sharedUser sharedUser){
-        idlookup.put(sharedUser.getDiscordID(), sharedUser);
-        nicklookup.put(sharedUser.getNick(), sharedUser);
-        UUIDlookup.put(sharedUser.getMcUUID(), sharedUser);
-        removeauthUser(sharedUser.getDiscordID());
+    public static void addUserAfterSync(SynchronizedUser SynchronizedUser){
+        idlookup.put(SynchronizedUser.getDiscordID(), SynchronizedUser);
+        nicklookup.put(SynchronizedUser.getNick(), SynchronizedUser);
+        UUIDlookup.put(SynchronizedUser.getMcUUID(), SynchronizedUser);
+        removeauthUser(SynchronizedUser.getDiscordID());
     }
 
     public static void addUserAfterSync(Object sendMultiplePermsUpdateipromise){
@@ -47,10 +46,10 @@ public class Data {
     }
 
 
-    public static void desyncUser(sharedUser sharedUser){
-        idlookup.remove(sharedUser.getDiscordID());
-        nicklookup.remove(sharedUser.getNick());
-        UUIDlookup.remove(sharedUser.getMcUUID());
+    public static void desyncUser(SynchronizedUser SynchronizedUser){
+        idlookup.remove(SynchronizedUser.getDiscordID());
+        nicklookup.remove(SynchronizedUser.getNick());
+        UUIDlookup.remove(SynchronizedUser.getMcUUID());
     }
 
 
@@ -72,35 +71,35 @@ public class Data {
     }
 
     @Nullable
-    public static sharedUser getsharedUser(long discordID){
+    public static SynchronizedUser getsharedUser(long discordID){
         return idlookup.get(discordID);
     }
     @Nullable
-    public static sharedUser getsharedUser(UUID mcUUID){
+    public static SynchronizedUser getsharedUser(UUID mcUUID){
         return UUIDlookup.get(mcUUID);
     }
 
     @Deprecated
     @Nullable
-    public static sharedUser getsharedUser(String nick){
+    public static SynchronizedUser getsharedUser(String nick){
         return nicklookup.get(nick);
     }
 
 
-    private static List<authUser> waitingforAuth = new CopyOnWriteArrayList<>();
+    private static List<RequiresSynchUser> waitingforAuth = new CopyOnWriteArrayList<>();
 
     public static void addtoauthorization(Object authUserIpromise){
         assert authUserIpromise instanceof String;
-        authUser authUser = main.gson.fromJson(authUserIpromise.toString(), authUser.class);
+        RequiresSynchUser RequiresSynchUser = main.gson.fromJson(authUserIpromise.toString(), RequiresSynchUser.class);
 
         //tldr proxy zmienia haslo wiec call do tego = nowy objekt
-        waitingforAuth.remove(authUser);
-        waitingforAuth.add(authUser);
+        waitingforAuth.remove(RequiresSynchUser);
+        waitingforAuth.add(RequiresSynchUser);
     }
 
     private static boolean removeauthUser(long discordID){
-        authUser toreturn = null;
-        for (authUser tempAuthkey : waitingforAuth) {
+        RequiresSynchUser toreturn = null;
+        for (RequiresSynchUser tempAuthkey : waitingforAuth) {
             if(discordID == tempAuthkey.getDiscordID()){
                 toreturn = tempAuthkey;
                 break;
@@ -115,10 +114,10 @@ public class Data {
 
 
     @Nullable
-    public static authUser getauthUser(String nick){
-        authUser toreturn = null;
+    public static RequiresSynchUser getauthUser(String nick){
+        RequiresSynchUser toreturn = null;
 
-        for (authUser tempAuthkey : waitingforAuth) {
+        for (RequiresSynchUser tempAuthkey : waitingforAuth) {
             if(nick.equals(tempAuthkey.getMcNick())){
                 toreturn = tempAuthkey;
                 break;
@@ -127,10 +126,10 @@ public class Data {
         return toreturn;
     }
     @Nullable
-    public static authUser getauthUser(long discordID){
-        authUser toreturn = null;
+    public static RequiresSynchUser getauthUser(long discordID){
+        RequiresSynchUser toreturn = null;
 
-        for (authUser tempAuthkey : waitingforAuth) {
+        for (RequiresSynchUser tempAuthkey : waitingforAuth) {
             if(discordID == tempAuthkey.getDiscordID()){
                 toreturn = tempAuthkey;
                 break;
@@ -139,16 +138,16 @@ public class Data {
         return toreturn;
     }
 
-    public static void removetempauth(authUser user){
+    public static void removetempauth(RequiresSynchUser user){
         waitingforAuth.remove(user);
     }
 
 
-    public static void addtoauth(List<authUser> authUsers){
-        waitingforAuth.addAll(authUsers);
+    public static void addtoauth(List<RequiresSynchUser> requiresSynchUsers){
+        waitingforAuth.addAll(requiresSynchUsers);
     }
-    public static void addtoSharedUsers(List<sharedUser> sharedUserList){
-        for (sharedUser shr : sharedUserList){
+    public static void addtoSharedUsers(List<SynchronizedUser> synchronizedUserList){
+        for (SynchronizedUser shr : synchronizedUserList){
             addUserAfterSync(shr);
         }
     }

@@ -1,12 +1,11 @@
 package genek530.proxyCommons.discord.util;
 
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.SynchronizedUser;
 import genek530.proxyCommons.main;
 import org.apache.commons.text.StringSubstitutor;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class messageBuilder {
     public static String mctodscUnsync(String mcNick, String message, String server){
@@ -84,7 +83,7 @@ public class messageBuilder {
         return sub.replace(main.conf.getSynchroczatuwiadomosci().get("jointomcunsynced"));
     }
 
-    public static String joinedServer(sharedUser sharedusr, String server){
+    public static String joinedServer(SynchronizedUser sharedusr, String server){
         Map<String, String> values = new HashMap<>();
         values.put("mcnick", sharedusr.getNick());
         values.put("server", server);
@@ -105,7 +104,7 @@ public class messageBuilder {
         return sub.replace(main.conf.getSynchroczatuwiadomosci().get("changedserverunsynced"));
 
     }
-    public static String changedServer(sharedUser sharedusr, String server, String previousserver){
+    public static String changedServer(SynchronizedUser sharedusr, String server, String previousserver){
         Map<String, String> values = new HashMap<>();
         values.put("mcnick", sharedusr.getNick());
         values.put("server", server);
@@ -125,10 +124,10 @@ public class messageBuilder {
         //nie returnowac nie stringa bo chce trzymac to jako common. Net.kyori.adventure maybe by dzialal ale idk czy bungee to ogarnia
         return sub.replace(main.conf.getSynchroczatuwiadomosci().get("playerquitunsynced"));
     }
-    public static String quitserver(sharedUser sharedUser, String server){
+    public static String quitserver(SynchronizedUser SynchronizedUser, String server){
         Map<String, String> values = new HashMap<>();
-        values.put("mcnick", sharedUser.getNick());
-        values.put("dscmention", "<@" + String.valueOf(sharedUser.getDiscordID()) + ">");
+        values.put("mcnick", SynchronizedUser.getNick());
+        values.put("dscmention", "<@" + String.valueOf(SynchronizedUser.getDiscordID()) + ">");
         values.put("server", server);
 
         StringSubstitutor sub = new StringSubstitutor(values);

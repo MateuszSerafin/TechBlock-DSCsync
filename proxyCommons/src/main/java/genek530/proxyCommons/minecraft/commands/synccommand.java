@@ -1,8 +1,8 @@
 package genek530.proxyCommons.minecraft.commands;
 
 
-import genek530.commons.internal.authUser;
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.RequiresSynchUser;
+import genek530.commons.internal.SynchronizedUser;
 import genek530.commons.redis.redisPacket;
 import genek530.commons.redis.sendMultiplePermsUpdate;
 import genek530.commons.redis.validActions;
@@ -10,9 +10,7 @@ import genek530.proxyCommons.Data;
 import genek530.proxyCommons.main;
 import genek530.proxyCommons.utils.lputil;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 public class synccommand {
     public static String execute(String playerName, UUID playerUUID, String haslo) {
@@ -27,12 +25,12 @@ public class synccommand {
         }
 
          */
-        authUser checked = Data.getauthUser(playerName);
+        RequiresSynchUser checked = Data.getauthUser(playerName);
         if(checked == null){
             return "mc-sync-zlewpisanynicklubhaslo";
         }
         if(checked.matchOtherpass(haslo)){
-            sharedUser hehejuzwiemyktotojest = new sharedUser(checked.getDiscordID(), playerUUID, playerName);
+            SynchronizedUser hehejuzwiemyktotojest = new SynchronizedUser(checked.getDiscordID(), playerUUID, playerName);
             Data.addUserAfterSync(hehejuzwiemyktotojest);
             main.pyrite.sendPacket(new redisPacket(main.bootUUID, "standAlone", validActions.ackAuthorization, main.gson.toJson(new sendMultiplePermsUpdate(hehejuzwiemyktotojest, lputil.getPerms(hehejuzwiemyktotojest)))), "TBOT");
             //todo rolesyncer.syncall(hehejuzwiemyktotojest);

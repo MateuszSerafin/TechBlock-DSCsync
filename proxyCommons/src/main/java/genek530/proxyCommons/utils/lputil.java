@@ -1,19 +1,18 @@
 package genek530.proxyCommons.utils;
 
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.SynchronizedUser;
 import genek530.proxyCommons.Data;
 import genek530.proxyCommons.main;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.Node;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 public class lputil {
-    public static List<String> getPerms(sharedUser sharedUser){
-        User user = main.lapi.getUserManager().getUser(sharedUser.getMcUUID());;
+    public static List<String> getPerms(SynchronizedUser SynchronizedUser){
+        User user = main.lapi.getUserManager().getUser(SynchronizedUser.getMcUUID());;
 
         ArrayList<String> arrayList = new ArrayList<String>();
         for (Node node : user.getNodes()) {

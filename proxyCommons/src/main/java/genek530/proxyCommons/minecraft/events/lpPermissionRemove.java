@@ -1,6 +1,6 @@
 package genek530.proxyCommons.minecraft.events;
 
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.SynchronizedUser;
 import genek530.commons.redis.redisPacket;
 import genek530.commons.redis.sendPermUpdate;
 import genek530.commons.redis.validActions;
@@ -8,8 +8,6 @@ import genek530.proxyCommons.Data;
 import genek530.proxyCommons.main;
 import net.luckperms.api.event.node.NodeRemoveEvent;
 import net.luckperms.api.model.user.User;
-
-import java.util.Map;
 
 public class lpPermissionRemove {
 
@@ -20,7 +18,7 @@ public class lpPermissionRemove {
         if(!main.conf.isUpdatujpermisije()) return;
         if(!event.isUser()) return;
         User target = (User) event.getTarget();
-        sharedUser shareduser = Data.getsharedUser(target.getUniqueId());
+        SynchronizedUser shareduser = Data.getsharedUser(target.getUniqueId());
         if(shareduser == null) return;
         if(Data.skipRemoving.containsKey(target.getUniqueId())){
             Data.skipRemoving.remove(target.getUniqueId());

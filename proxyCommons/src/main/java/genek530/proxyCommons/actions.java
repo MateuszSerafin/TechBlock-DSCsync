@@ -1,6 +1,6 @@
 package genek530.proxyCommons;
 
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.SynchronizedUser;
 import genek530.commons.internal.updateData;
 import genek530.commons.redis.sendPermUpdate;
 import genek530.proxyCommons.utils.lputil;
@@ -23,7 +23,7 @@ public class actions {
         main.logger.info("DESCYNRHONIZE JUSER");
         UUID mcUUID = main.gson.fromJson(mcUUIDipromise.toString(), UUID.class);
 
-        sharedUser shrdusr = Data.getsharedUser(mcUUID);
+        SynchronizedUser shrdusr = Data.getsharedUser(mcUUID);
 
         if(shrdusr == null){
             main.logger.info("NULL szared juser");

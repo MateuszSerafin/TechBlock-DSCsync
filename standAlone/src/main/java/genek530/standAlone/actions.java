@@ -1,10 +1,7 @@
 package genek530.standAlone;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.ToNumberPolicy;
-import genek530.commons.internal.authUser;
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.RequiresSynchUser;
+import genek530.commons.internal.SynchronizedUser;
 import genek530.commons.internal.updateData;
 import genek530.commons.redis.redisPacket;
 import genek530.commons.redis.sendMultiplePermsUpdate;
@@ -19,7 +16,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class actions {
 
@@ -35,17 +31,17 @@ public class actions {
 
 
     //kiedy zmieniane jest haslo,lub jest initial tworzenie usera
-    public static void authentication(authUser authUser){
-        Data.removetempauth(authUser);
-        Data.addauthUser(authUser);
-        Main.pyrite.sendPacket(new redisPacket("standAlone", "broadcast", validActions.updateAuthenticatedUsers, Main.gson.toJson(authUser)), "TBOT");
+    public static void authentication(RequiresSynchUser RequiresSynchUser){
+        Data.removetempauth(RequiresSynchUser);
+        Data.addauthUser(RequiresSynchUser);
+        Main.pyrite.sendPacket(new redisPacket("standAlone", "broadcast", validActions.updateAuthenticatedUsers, Main.gson.toJson(RequiresSynchUser)), "TBOT");
     }
 
 
 
-    public static void desyncUser(sharedUser sharedUser){
+    public static void desyncUser(SynchronizedUser SynchronizedUser){
         Guild guild = discordContainer.getJda().getGuildById(Main.conf.getGuild());
-        Member member = guild.getMemberById(sharedUser.getDiscordID());
+        Member member = guild.getMemberById(SynchronizedUser.getDiscordID());
         if(member == null){
             Main.logger.info("Member null");
             return;
@@ -60,21 +56,21 @@ public class actions {
             }
         }
 
-        Data.desyncUser(sharedUser);
+        Data.desyncUser(SynchronizedUser);
     }
     public static void syncUser(Object sendMultiplePermsUpdateipromise){
         assert  sendMultiplePermsUpdateipromise instanceof String;
 
         sendMultiplePermsUpdate multiplePerms = Main.gson.fromJson(sendMultiplePermsUpdateipromise.toString(), sendMultiplePermsUpdate.class);
 
-        sharedUser sharedUser = Data.getsharedUser(multiplePerms.getMcuuid());
-        if(sharedUser == null) {
+        SynchronizedUser SynchronizedUser = Data.getsharedUser(multiplePerms.getMcuuid());
+        if(SynchronizedUser == null) {
             Main.logger.info(String.format("CANNOT SYNC USER shared User doesnt exist "));
             return;
         }
 
         Guild guild = discordContainer.getJda().getGuildById(Main.conf.getGuild());
-        Member member = guild.getMemberById(sharedUser.getDiscordID());
+        Member member = guild.getMemberById(SynchronizedUser.getDiscordID());
         if(member == null){
             Main.logger.info("Member null");
             return;
@@ -98,7 +94,7 @@ public class actions {
                 guild.addRoleToMember(member, guild.getRoleById(entry.getKey())).queue();
             }
             if(!mapermisije && mapermisjeandsc){
-                Main.pyrite.sendPacket(new redisPacket("standAlone", "broadcast", validActions.adddsctoMC, new sendPermUpdate(sharedUser.getMcUUID(), entry.getValue())), "TBOT");
+                Main.pyrite.sendPacket(new redisPacket("standAlone", "broadcast", validActions.adddsctoMC, new sendPermUpdate(SynchronizedUser.getMcUUID(), entry.getValue())), "TBOT");
             }
         }
 
@@ -108,14 +104,14 @@ public class actions {
     public static void addMCtodsc(Object sendPermUpdateipromise){
         assert  sendPermUpdateipromise instanceof String;
         sendPermUpdate discordID = Main.gson.fromJson(sendPermUpdateipromise.toString(), sendPermUpdate.class);
-        sharedUser sharedUser = Data.getsharedUser(discordID.getMcUUID());
-        if(sharedUser == null) return;
+        SynchronizedUser SynchronizedUser = Data.getsharedUser(discordID.getMcUUID());
+        if(SynchronizedUser == null) return;
 
         Guild guild = discordContainer.getJda().getGuildById(Main.conf.getGuild());
 
         Main.logger.info("1");
 
-        Member member = guild.getMemberById(sharedUser.getDiscordID());
+        Member member = guild.getMemberById(SynchronizedUser.getDiscordID());
         if(member == null) return;
         Role role = guild.getRoleById(subUtils.getRolefromstring(discordID.getPermission()));
 
@@ -128,7 +124,7 @@ public class actions {
 
         Main.logger.info("3");
 
-        Data.addSkip.put(sharedUser.getDiscordID(), role.getIdLong());
+        Data.addSkip.put(SynchronizedUser.getDiscordID(), role.getIdLong());
         guild.addRoleToMember(member, role).queue();
     }
 
@@ -137,19 +133,19 @@ public class actions {
     public static void remMCtodsc(Object sendPermUpdateipromise){
         assert  sendPermUpdateipromise instanceof String;
         sendPermUpdate discordID = Main.gson.fromJson(sendPermUpdateipromise.toString(), sendPermUpdate.class);
-        sharedUser sharedUser = Data.getsharedUser(discordID.getMcUUID());
-        if(sharedUser == null) return;
+        SynchronizedUser SynchronizedUser = Data.getsharedUser(discordID.getMcUUID());
+        if(SynchronizedUser == null) return;
 
         Guild guild = discordContainer.getJda().getGuildById(Main.conf.getGuild());
 
-        Member member = guild.getMemberById(sharedUser.getDiscordID());
+        Member member = guild.getMemberById(SynchronizedUser.getDiscordID());
         if(member == null) return;
         Role role = guild.getRoleById(subUtils.getRolefromstring(discordID.getPermission()));
         if(role == null) {
             Main.logger.info("ROLE NOT FOUND");
             return;
         }
-        Data.remSkip.put(sharedUser.getDiscordID(), role.getIdLong());
+        Data.remSkip.put(SynchronizedUser.getDiscordID(), role.getIdLong());
         guild.removeRoleFromMember(member, role).queue();
     }
 

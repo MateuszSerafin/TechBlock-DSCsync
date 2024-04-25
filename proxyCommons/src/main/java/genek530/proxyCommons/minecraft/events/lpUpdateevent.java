@@ -1,8 +1,7 @@
 package genek530.proxyCommons.minecraft.events;
 
-import genek530.commons.internal.sharedUser;
+import genek530.commons.internal.SynchronizedUser;
 import genek530.commons.redis.redisPacket;
-import genek530.commons.redis.sendMultiplePermsUpdate;
 import genek530.commons.redis.validActions;
 import genek530.proxyCommons.Data;
 import genek530.proxyCommons.main;
@@ -20,7 +19,7 @@ public class lpUpdateevent {
     private static void handlePermissions(UUID playerUUID){
         if(!main.conf.isUpdatujpermisije()) return;
         //Jak plugin/bot byl offline gracz moze byc nie zsynchronizowany
-        sharedUser shareduser = Data.getsharedUser(playerUUID);
+        SynchronizedUser shareduser = Data.getsharedUser(playerUUID);
         if(shareduser == null) return;
 
         List<String> nowperms = lputil.getPerms(shareduser);
