@@ -1,0 +1,43 @@
+#Verfiy module - verification of dsc account to dsc
+#chat dsc to mc - allows for chat (can be used without verify module)
+#permission sync module - syncess permissions (requires verify module, otherwise won't start)
+modulesEnabled:
+  verify_module: false
+  chat_module: false
+  permission_module: false
+
+messages:
+  #This embed will be used by default and you can override parts of it in other embeds or remove option by using just ''
+  default:
+
+
+
+  #todo mozna dodac dodatkowe opcje ofc
+  #${playernick} ${playeruuid}
+  dsc-sync-juzsynced:
+    title: "Twoje konto jest juz z synchronizowane"
+    description: "${playernick}"
+    thumbnail: "https://mc-heads.net/avatar/${playeruuid}"
+    image: "https://techblock.pl/storage/uploads/1665058313Optimized-background-SkyTech%20II.png"
+    color: "#ffffff"
+
+
+  #${klucz}, ${playernick}
+  dsc-sync-makluczaleniejestsynced:
+    #wpisz se opcje wyzej jakie chcesz title thumbnail image etc...
+    description: "tfuj nowy klucz to ${klucz}"
+
+  #${klucz} ${playernick}
+  dsc-sync-ostatnietap:
+    title: "UGHH.. Jeszcze jeden etap"
+    description: "wpisz ${klucz} w majkraft"
+    image: "https://techblock.pl/storage/uploads/1665058313Optimized-background-SkyTech%20II.png"
+
+
+  #nie ma zadnych opcji co ja mam tu dac xD
+  dsc-unsync-niejestsync:
+    title: "huehueuheu"
+
+  #${playernick} ${playeruuid}
+  dsc-unsync-success:
+    description: "tfuj nick był ${playernick}"

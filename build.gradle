@@ -1,4 +1,4 @@
-group = 'com.genek530'
+group = 'com.gmail.genek530'
 version = '1.0-SNAPSHOT'
 
 subprojects {
@@ -8,7 +8,7 @@ subprojects {
     group = parent.group
     version = parent.version
 
-    def targetJavaVersion = 11
+    def targetJavaVersion = 8
     java {
         def javaVersion = JavaVersion.toVersion(targetJavaVersion)
         sourceCompatibility = javaVersion

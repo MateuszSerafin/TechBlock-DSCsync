@@ -1,0 +1,17 @@
+#This bot requires permission for role adding and removing if permission module is used
+botToken: INVALID
+
+#listening, playing, streaming, watching
+#if activity is '' then it's not set
+activityName: Listening
+activityDescription: to music
+
+commands:
+  sync:
+    commandName: sync
+    commandDesc: synchronize your dsc account with discord
+    argumentOne: nick
+    argumentOneDesc: Your minecraft nickname
+  unsync:
+    commandName: unsync
+    commandDesc: desync your account

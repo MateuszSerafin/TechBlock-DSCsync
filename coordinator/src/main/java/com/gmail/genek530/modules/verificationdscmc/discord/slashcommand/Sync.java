@@ -1,0 +1,12 @@
+package com.gmail.genek530.modules.verificationdscmc.discord.slashcommand;
+
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import org.jetbrains.annotations.NotNull;
+
+public class Sync {
+    protected static void execute(@NotNull SlashCommandInteractionEvent event){
+        System.out.println("Synced");
+    }
+
+
+}

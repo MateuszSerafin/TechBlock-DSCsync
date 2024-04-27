@@ -1,3 +1,2 @@
 rootProject.name = 'TBOT'
-
-include 'standAlone', 'proxyCommons', 'commons', 'velocity'
+include  'commons','coordinator', 'onproxy'
