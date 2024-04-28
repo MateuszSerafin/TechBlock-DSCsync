@@ -12,6 +12,8 @@ public class VerifyModuleConfig {
 
     private HashMap<String, HashMap<String, String>> commands;
 
+    private HashMap<String, HashMap<String, String>> messages;
+
     public VerifyModuleConfig(){
 
     }
@@ -46,5 +48,13 @@ public class VerifyModuleConfig {
 
     public void setCommands(HashMap<String, HashMap<String, String>> commands) {
         this.commands = commands;
+    }
+
+    public HashMap<String, HashMap<String, String>> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(HashMap<String, HashMap<String, String>> messages) {
+        this.messages = messages;
     }
 }

@@ -15,3 +15,33 @@ commands:
   unsync:
     commandName: unsync
     commandDesc: desync your account
+
+
+messages:
+  #This embed will be used by default and you can override parts of it in other embeds or remove option by using just ''
+  default:
+    image: "https://techblock.pl/storage/uploads/1665058313Optimized-background-SkyTech%20II.png"
+    color: "#ffffff"
+
+  #${playeruuid}, ${playernick}
+  syncAlreadySynced:
+    title: "You are already synchronized"
+    description: "Your minecraft nick is ${playeruuid}"
+
+  #${playernick}, ${key}
+  syncLastAction:
+    title: "One more action"
+    description: "Your key is ${key} you need it to use it on minecraft server /sync ${key}"
+
+  #${playernick}, ${key}
+  syncNewKey:
+    title: "You got your new key"
+    description: "Your new key is ${key} you need it to use it on minecraft server /sync ${key}"
+
+  syncSuccess:
+
+
+  #TODO it needs 2 more messages when not synchronized and use this ocmmand and when just in sync
+  unsyncSuccess:
+    title: "You are no longer synchronized"
+    description: "You are no longer synchronized"

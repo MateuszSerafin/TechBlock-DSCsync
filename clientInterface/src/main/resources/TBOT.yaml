@@ -1,0 +1,24 @@
+redis:
+  ip: 192.168.0.26
+  port: 6379
+  password: realpassword12345
+  whoAmI: proxy1
+
+#Disable modules unused it sends less packets.
+#If left as true nothing will happen if coordinator is not configured
+modulesEnabled:
+  verify_module: false
+  chat_module: false
+  permission_module: false
+
+
+
+messages:
+  #verification module
+  verifyWait: "Please wait...."
+
+  #${discordname}
+  verifySuccess: "&a Verification succeded now you are known as ${discordname}"
+  verifyFailure: "&c Verification failed"
+
+

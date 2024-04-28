@@ -1,12 +1,15 @@
 package com.gmail.genek530.modules.verificationdscmc;
 
 import com.gmail.genek530.Main;
+import com.gmail.genek530.modules.verificationdscmc.common.RequireAuthUser;
 import com.gmail.genek530.modules.verificationdscmc.common.VerifiedUser;
 import com.google.gson.Gson;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -33,15 +36,29 @@ public class VerifiedUserDB {
         return UUIDlookup.get(mcUUID);
     }
 
-    public static void deSynchronizeUser(VerifiedUser VerifiedUser){
+    public static void deSynchronizeUser(VerifiedUser VerifiedUser) {
         idlookup.remove(VerifiedUser.getDiscordID());
         UUIDlookup.remove(VerifiedUser.getMcUUID());
+        try{
+            File data = new File(Main.getDataDir() + "/modules/verification/" + VerifiedUser.getMcUUID().toString());
+            if(data.exists()) Files.delete(data.toPath());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
+    public static void SynchronizeUser(RequireAuthUser authUser, UUID mcUUID){
+        VerifiedUser verifiedUser =  new VerifiedUser(authUser.getDiscordID(), mcUUID, authUser.getMcNick());
+        idlookup.put(authUser.getDiscordID(), verifiedUser);
+        UUIDlookup.put(mcUUID, verifiedUser);
+        saveSynchronizedUser(verifiedUser.getMcUUID());
+    }
+
 
     public static boolean saveSynchronizedUser(UUID mcUUID){
         try {
             File dataDir = Main.getDataDir();
-            File data = new File(dataDir + "/" + mcUUID.toString());
+            File data = new File(dataDir + "/modules/verification/" + mcUUID.toString());
             Gson gson = new Gson();
             FileWriter writer = new FileWriter(data);
 
