@@ -9,7 +9,9 @@ public class TBOTConfiguration {
 
     private HashMap<String, String> messages;
 
-    private HashMap<String, String> redisInfo;
+    private HashMap<String, String> redis;
+
+    private HashMap<String, String> commandAlias;
 
     public HashMap<String, Boolean> getModulesEnabled() {
         return modulesEnabled;
@@ -27,11 +29,19 @@ public class TBOTConfiguration {
         return messages;
     }
 
-    public HashMap<String, String> getRedisInfo() {
-        return redisInfo;
+    public HashMap<String, String> getRedis() {
+        return redis;
     }
 
-    public void setRedisInfo(HashMap<String, String> redisInfo) {
-        this.redisInfo = redisInfo;
+    public void setRedis(HashMap<String, String> redisInfo) {
+        this.redis = redisInfo;
+    }
+
+    public HashMap<String, String> getCommandAlias() {
+        return commandAlias;
+    }
+
+    public void setCommandAlias(HashMap<String, String> commandAlias) {
+        this.commandAlias = commandAlias;
     }
 }

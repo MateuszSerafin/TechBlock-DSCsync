@@ -7,10 +7,10 @@ public class PyritePacket extends Packet {
     private String sender;
     private String destination;
 
-    private ValidPackets validPacket;
+    private String validPacket;
     private Object information;
 
-    public PyritePacket(String sender, String destination, ValidPackets validPacket, Object information){
+    public PyritePacket(String sender, String destination, String validPacket, Object information){
         this.sender = sender;
         this.destination = destination;
         this.validPacket = validPacket;
@@ -25,7 +25,7 @@ public class PyritePacket extends Packet {
         return destination;
     }
 
-    public ValidPackets getValidPacket() {
+    public String getValidPacket() {
         return validPacket;
     }
 

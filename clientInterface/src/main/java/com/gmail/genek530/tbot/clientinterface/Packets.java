@@ -1,5 +1,6 @@
 package com.gmail.genek530.tbot.clientinterface;
 
+import com.gmail.genek530.tbot.clientinterface.modules.verification.PacketResponses;
 import com.gmail.genek530.tbot.commons.PyritePacket;
 import com.gmail.genek530.tbot.commons.ValidPackets;
 import io.github.thatkawaiisam.pyrite.Pyrite;
@@ -13,7 +14,7 @@ public class Packets {
     private static String whoAMI;
 
     public static void init(String ip, Integer port, String password, String whoAmIVar){
-        PackerHandler standAloneHandler = new PackerHandler();
+        PacketHandler standAloneHandler = new PacketHandler();
         pyrite = new Pyrite(new PyriteCredentials(ip, password, port));
         pyrite.registerContainer(standAloneHandler);
         whoAMI = whoAmIVar;
@@ -28,16 +29,4 @@ public class Packets {
         return whoAMI;
     }
 
-}
-class PackerHandler implements PacketContainer {
-    @PacketListener
-    public void onTestPacket(PyritePacket packet) {
-        if(!packet.getDestination().equalsIgnoreCase(Packets.getWhoAMI())){
-            return;
-        }
-
-
-
-
-    }
 }

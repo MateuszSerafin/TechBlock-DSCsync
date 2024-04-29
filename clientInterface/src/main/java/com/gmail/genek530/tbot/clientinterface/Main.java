@@ -26,6 +26,8 @@ public class Main {
     //Data dir should be /plugins/TBOT/
     public static void init(File dataDir, Logger logger, ClientImplementation clientImplementationVar) throws Exception {
         boolean requireConfiguration = false;
+
+        if(!dataDir.exists()) dataDir.mkdir();
         File mainConfigFile = new File(dataDir + "/TBOT.yaml");
         if(!mainConfigFile.exists()){
             Files.copy(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("TBOT.yaml")), mainConfigFile.toPath());
@@ -40,7 +42,7 @@ public class Main {
         Yaml yaml = new Yaml(new Constructor(TBOTConfiguration.class));
         tbotConfiguration = yaml.load(new UnicodeReader(new FileInputStream(mainConfigFile)));
 
-        HashMap<String,String> redis = tbotConfiguration.getRedisInfo();
+        HashMap<String,String> redis = tbotConfiguration.getRedis();
         Packets.init(redis.get("ip"), Integer.parseInt(redis.get("port")), redis.get("password"), redis.get("whoAmI"));
     }
 

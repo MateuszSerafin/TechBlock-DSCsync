@@ -11,12 +11,14 @@ modulesEnabled:
   chat_module: false
   permission_module: false
 
-
+#You can change name of command
+commandAlias:
+  verify: "discordsync"
 
 messages:
   #verification module
+  verifyNotPassword: "You didn't provide password"
   verifyWait: "Please wait...."
-
   #${discordname}
   verifySuccess: "&a Verification succeded now you are known as ${discordname}"
   verifyFailure: "&c Verification failed"

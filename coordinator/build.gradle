@@ -47,7 +47,7 @@ dependencies {
     implementation 'com.github.DV8FromTheWorld:JDA:v5.0.0-alpha.12'
     implementation 'org.yaml:snakeyaml:1.30'
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation files('../libs/pyrite-1.0-20210906.080820-11.jar')
+    implementation files('../libs/Pyrite-1.1-SNAPSHOT.jar')
     implementation 'redis.clients:jedis:2.9.0'
     implementation("org.apache.commons:commons-text:1.10.0")
     api project(":commons")
