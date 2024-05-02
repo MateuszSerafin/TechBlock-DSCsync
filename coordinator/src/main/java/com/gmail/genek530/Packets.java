@@ -1,5 +1,6 @@
 package com.gmail.genek530;
 
+import com.gmail.genek530.modules.verificationdscmc.VerifyPackets;
 import com.gmail.genek530.tbot.commons.PyritePacket;
 import com.gmail.genek530.tbot.commons.ValidPackets;
 import io.github.thatkawaiisam.pyrite.Pyrite;
@@ -11,27 +12,15 @@ public class Packets {
     private static Pyrite pyrite;
 
     public static void init(String ip, Integer port, String password){
-        PackerHandler standAloneHandler = new PackerHandler();
+        PacketHandler standAloneHandler = new PacketHandler();
         pyrite = new Pyrite(new PyriteCredentials(ip, password, port));
         pyrite.registerContainer(standAloneHandler);
     }
 
 
-    public static void sendToSpecificClient(String destination, ValidPackets action, String Data){
+    public static void sendToSpecificClient(String destination, String action, String Data){
         pyrite.sendPacket(new PyritePacket("coordinator", destination, action, Data), "TBOT");
     }
 
 
-}
-class PackerHandler implements PacketContainer {
-    @PacketListener
-    public void onTestPacket(PyritePacket packet) {
-        if(!packet.getDestination().equalsIgnoreCase("coordinator")){
-            return;
-        }
-
-
-
-
-    }
 }

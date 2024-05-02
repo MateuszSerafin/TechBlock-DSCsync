@@ -68,6 +68,8 @@ public class Main {
         }
 
 
+        HashMap<String,String> redis = mainConfig.getRedis();
+        Packets.init(redis.get("ip"), Integer.parseInt(redis.get("port")), redis.get("password"));
 
         String line =  new Scanner(System.in).nextLine();
     }

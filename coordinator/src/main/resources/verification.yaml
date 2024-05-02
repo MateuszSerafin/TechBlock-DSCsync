@@ -38,8 +38,10 @@ messages:
     title: "You got your new key"
     description: "Your new key is ${key} you need it to use it on minecraft server /sync ${key}"
 
+  #${playernick}
   syncSuccess:
-
+    title: "You successfully synchronized"
+    description: "Your mc nick is ${playernick}"
 
   #TODO it needs 2 more messages when not synchronized and use this ocmmand and when just in sync
   unsyncSuccess:

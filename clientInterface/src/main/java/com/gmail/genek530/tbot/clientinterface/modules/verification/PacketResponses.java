@@ -16,15 +16,17 @@ public class PacketResponses {
         //failed, mcnick, mcuuid, discordname, discordid
         List<String> deSerialized = new Gson().fromJson(data, List.class);
         StringSubstitutor substitutor = new StringSubstitutor(Map.of("mcnick", deSerialized.get(1), "mcuuid", deSerialized.get(2), "discordname", deSerialized.get(3), "discordid", deSerialized.get(4)));
-        UUID mcUUID = UUID.fromString(deSerialized.get(1));
+        UUID mcUUID = UUID.fromString(deSerialized.get(2));
 
 
         if(deSerialized.get(0).equalsIgnoreCase("fail")){
             Main.getClientImplementation().sendMessageToSpecificPlayer(mcUUID,substitutor.replace(Main.getTbotConfiguration().getMessages().get("verifyFailure")));
+            return;
         }
 
         if(deSerialized.get(0).equalsIgnoreCase("success")){
             Main.getClientImplementation().sendMessageToSpecificPlayer(mcUUID,substitutor.replace(Main.getTbotConfiguration().getMessages().get("verifySuccess")));
+            return;
         }
 
         try {

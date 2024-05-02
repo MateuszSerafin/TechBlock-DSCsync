@@ -33,7 +33,7 @@ tasks.withType(JavaCompile) {
 
 
 dependencies {
-    implementation files('../libs/Pyrite-1.1-SNAPSHOT.jar')
+    compileOnly files('../libs/Pyrite-1.1-SNAPSHOT.jar')
 
 }
 

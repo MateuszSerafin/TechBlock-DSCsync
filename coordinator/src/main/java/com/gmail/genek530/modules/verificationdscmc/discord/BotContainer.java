@@ -59,4 +59,8 @@ public class BotContainer {
         jda.upsertCommand(unsyncCommand.get("commandName"), unsyncCommand.get("commandDesc")).queue();
 
     }
+
+    public static JDA getJda() {
+        return jda;
+    }
 }

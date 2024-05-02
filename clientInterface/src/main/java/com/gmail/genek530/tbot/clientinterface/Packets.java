@@ -21,7 +21,7 @@ public class Packets {
     }
 
 
-    public static void sendToCoordinator(ValidPackets action, String Data){
+    public static void sendToCoordinator(String action, String Data){
         pyrite.sendPacket(new PyritePacket(whoAMI, "coordinator", action, Data), "TBOT");
     }
 

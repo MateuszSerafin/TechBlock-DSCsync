@@ -9,13 +9,7 @@ public class VerifyCommand implements SimpleCommand {
     @Override
     public void execute(Invocation invocation) {
         Player source = (Player) invocation.source();
-        // Get the arguments after the command alias
         String[] args = invocation.arguments();
-        if (args.length < 1) {
-            source.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(Main.getTbotConfiguration().getMessages().get("verifyNotPassword")));
-            return;
-        }
-        com.gmail.genek530.tbot.clientinterface.modules.verification.UserCommands.syncCommand(source.getUsername(), source.getUniqueId(), args[0]);
-        return;
+        com.gmail.genek530.tbot.clientinterface.modules.verification.UserCommands.syncCommand(source.getUsername(), source.getUniqueId(), args);
     }
 }

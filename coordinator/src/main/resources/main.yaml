@@ -5,3 +5,8 @@ modulesEnabled:
   verify_module: false
   chat_module: false
   permission_module: false
+
+redis:
+  ip: 192.168.0.26
+  port: 6379
+  password: realpassword12345
