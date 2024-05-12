@@ -1,13 +1,17 @@
 package com.gmail.genek530;
 
-import com.gmail.genek530.modules.verificationdscmc.VerifyModule;
+import com.gmail.genek530.discord.MainDiscordBot;
+import com.gmail.genek530.discord.configs.MainConfig;
+import com.gmail.genek530.discord.configs.VerifyModuleConfig;
+import com.gmail.genek530.minecraft.PacketRequests;
+import com.gmail.genek530.minecraft.callbacks.ProxyServer;
+import com.gmail.genek530.discord.userverification.data.VerifiedUserDB;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.reader.UnicodeReader;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Objects;
@@ -19,13 +23,18 @@ public class Main {
 
     private static final File dataDir = new File(".");
 
+    private static MainConfig mainConfig;
+
+    private static VerifyModuleConfig verifyModuleConfig;
+
+    private static HashMap<String, ProxyServer> proxyServers = new HashMap<>();
+
 
     public static void main(String[] args) throws Exception {
         boolean requireConfiguration = false;
 
         File moduleDir = new File(dataDir + "/modules/");
         if(!moduleDir.exists()) moduleDir.mkdir();
-
 
         File mainConfigFile = new File(dataDir + "/main.yaml");
         if(!mainConfigFile.exists()){
@@ -39,41 +48,47 @@ public class Main {
             requireConfiguration = true;
         }
 
-
         if(requireConfiguration){
             //TODO this triggers unecessarly when module is added
             System.out.println("Something has changed you need to configure it.");
             return;
         }
-
-            /*
-            //https://www.spigotmc.org/threads/cannot-use-shaded-snakeyaml-to-construct-class-object.136707/
-            Thread.currentThread().setContextClassLoader(Main.class.getClassLoader());
-
-             */
+        /*
+        //https://www.spigotmc.org/threads/cannot-use-shaded-snakeyaml-to-construct-class-object.136707/
+        Thread.currentThread().setContextClassLoader(Main.class.getClassLoader());
+         */
 
         Yaml yaml = new Yaml(new Constructor(MainConfig.class));
         MainConfig mainConfig = yaml.load(new UnicodeReader(new FileInputStream(mainConfigFile)));
 
-        HashMap<String, Boolean> modulesEnabled = mainConfig.getModulesEnabled();
 
-        //crime
-        if(modulesEnabled.containsKey("verify_module") && modulesEnabled.containsKey("chat_module") && modulesEnabled.containsKey("permission_module")) {
-            Main.getLogger().info("Module configuration checking...");
-        } else throw new Exception("Not all of module objects were found in confiugration file. Please delete main.yaml and allow for regeneration");
+        Yaml verification = new Yaml(new Constructor(VerifyModuleConfig.class));
+        verifyModuleConfig = verification.load(new UnicodeReader(new FileInputStream(Main.getDataDir() + "/modules/verification.yaml")));
 
-        if(modulesEnabled.get("verify_module")){
-            Main.getLogger().info("Verify module is starting up...");
-            VerifyModule.init();
+        MainDiscordBot.initalize();
+        VerifiedUserDB.init();
+
+        for (String server : mainConfig.getProxyServers()) {
+            proxyServers.put(server, new ProxyServer(server));
         }
 
-
         HashMap<String,String> redis = mainConfig.getRedis();
-        Packets.init(redis.get("ip"), Integer.parseInt(redis.get("port")), redis.get("password"));
+        PacketRequests.init(redis.get("ip"), Integer.parseInt(redis.get("port")), redis.get("password"));
 
         String line =  new Scanner(System.in).nextLine();
     }
 
+    public static HashMap<String, ProxyServer> getProxyServers() {
+        return proxyServers;
+    }
+
+    public static MainConfig getMainConfig() {
+        return mainConfig;
+    }
+
+    public static VerifyModuleConfig getVerifyModuleConfig() {
+        return verifyModuleConfig;
+    }
 
     public static File getDataDir(){
         return dataDir;

@@ -1,6 +1,6 @@
-package com.gmail.genek530.modules.verificationdscmc;
+package com.gmail.genek530.discord.userverification.data;
 
-import com.gmail.genek530.modules.verificationdscmc.common.RequireAuthUser;
+import com.gmail.genek530.discord.common.RequireAuthUser;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -9,11 +9,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class RequireAuthUserDB {
     private static List<RequireAuthUser> waitingForAuth = new CopyOnWriteArrayList<>();
 
-
     public static void addUserToAuth(RequireAuthUser authUser){
         waitingForAuth.add(authUser);
     }
-
 
     @Nullable
     public static RequireAuthUser getRequireAuthUser(String nick){

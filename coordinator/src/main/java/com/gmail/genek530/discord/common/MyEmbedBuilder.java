@@ -1,4 +1,4 @@
-package com.gmail.genek530.common;
+package com.gmail.genek530.discord.common;
 
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;

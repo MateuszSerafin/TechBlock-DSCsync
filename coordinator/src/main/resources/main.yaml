@@ -1,12 +1,44 @@
-#Verfiy module - verification of dsc account to dsc
-#chat dsc to mc - allows for chat (can be used without verify module)
-#permission sync module - syncess permissions (requires verify module, otherwise won't start)
-modulesEnabled:
-  verify_module: false
-  chat_module: false
-  permission_module: false
+proxyServers:
+  - "testproxy"
+
+
+mainBot:
+  token: "INVALID"
+
+  #listening, playing, streaming, watching
+  activityName: "listening"
+
+  #todo add more messages
+  #${networkonline} <- updates every time amount of online players
+  #${discordonline} <- self explanatory
+  descriptions:
+    - "Currently online players: ${networkonline}"
+    - "Discord online ${discordonline}"
+
+  #changes description every X minutes
+  changeFrequency: 1
+
+
+
+proxyBots:
+  #case sensitive if you don't add it this server won't be checked if it's online.
+  openTech:
+    token: "INVALID"
+
+    #listening, playing, streaming, watching
+    activityName: "listening"
+
+    #todo add more messages
+    #${proxyonline}
+    descriptions:
+      - "Online on open tech ${proxyonline} players"
+      - "Nie wiem tutaj wez ktos daj cos fajnego"
+
+    #changes description every X minutes
+    changeFrequency: 1
+
 
 redis:
-  ip: 192.168.0.26
+  ip: "192.168.0.26"
   port: 6379
-  password: realpassword12345
+  password: "realpassword12345"

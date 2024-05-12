@@ -1,4 +1,4 @@
-package com.gmail.genek530.modules.verificationdscmc;
+package com.gmail.genek530.discord.configs;
 
 import java.util.HashMap;
 
@@ -9,8 +9,6 @@ public class VerifyModuleConfig {
     private String activityName;
     //Rest of it
     private String activityDescription;
-
-    private HashMap<String, HashMap<String, String>> commands;
 
     private HashMap<String, HashMap<String, String>> messages;
 
@@ -40,14 +38,6 @@ public class VerifyModuleConfig {
 
     public void setActivityDescription(String activityDescription) {
         this.activityDescription = activityDescription;
-    }
-
-    public HashMap<String, HashMap<String, String>> getCommands() {
-        return commands;
-    }
-
-    public void setCommands(HashMap<String, HashMap<String, String>> commands) {
-        this.commands = commands;
     }
 
     public HashMap<String, HashMap<String, String>> getMessages() {

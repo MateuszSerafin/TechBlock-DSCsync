@@ -1,4 +1,4 @@
-package com.gmail.genek530.tbot.clientinterface.modules.verification;
+package com.gmail.genek530.tbot.clientinterface;
 
 import com.gmail.genek530.tbot.clientinterface.Main;
 import com.gmail.genek530.tbot.clientinterface.TBOTConfiguration;
@@ -11,6 +11,20 @@ import java.util.Map;
 import java.util.UUID;
 
 public class PacketResponses {
+    public static void handlegetAllPlayersonProxy(String callbackID){
+
+
+
+
+    }
+
+
+
+
+
+
+
+
 
     public static void handleVerify(String data){
         //failed, mcnick, mcuuid, discordname, discordid

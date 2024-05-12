@@ -1,4 +1,4 @@
-package com.gmail.genek530.modules.verificationdscmc.common;
+package com.gmail.genek530.discord.common;
 
 import java.security.SecureRandom;
 import java.util.Locale;

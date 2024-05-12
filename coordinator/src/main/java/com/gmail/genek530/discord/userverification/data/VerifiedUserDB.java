@@ -1,14 +1,13 @@
-package com.gmail.genek530.modules.verificationdscmc;
+package com.gmail.genek530.discord.userverification.data;
 
 import com.gmail.genek530.Main;
-import com.gmail.genek530.modules.verificationdscmc.common.RequireAuthUser;
-import com.gmail.genek530.modules.verificationdscmc.common.VerifiedUser;
+import com.gmail.genek530.discord.common.RequireAuthUser;
+import com.gmail.genek530.discord.common.VerifiedUser;
 import com.google.gson.Gson;
 import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;

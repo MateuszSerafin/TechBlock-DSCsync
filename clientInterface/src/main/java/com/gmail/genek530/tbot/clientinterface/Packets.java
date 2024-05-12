@@ -1,12 +1,8 @@
 package com.gmail.genek530.tbot.clientinterface;
 
-import com.gmail.genek530.tbot.clientinterface.modules.verification.PacketResponses;
 import com.gmail.genek530.tbot.commons.PyritePacket;
-import com.gmail.genek530.tbot.commons.ValidPackets;
 import io.github.thatkawaiisam.pyrite.Pyrite;
 import io.github.thatkawaiisam.pyrite.PyriteCredentials;
-import io.github.thatkawaiisam.pyrite.packet.PacketContainer;
-import io.github.thatkawaiisam.pyrite.packet.PacketListener;
 
 public class Packets {
     private static Pyrite pyrite;

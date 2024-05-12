@@ -1,4 +1,4 @@
-package com.gmail.genek530.modules.verificationdscmc.common;
+package com.gmail.genek530.discord.common;
 
 public class RequireAuthUser {
     //uzywane tylko do synchronizacji usera nie uzywac do niczego innego

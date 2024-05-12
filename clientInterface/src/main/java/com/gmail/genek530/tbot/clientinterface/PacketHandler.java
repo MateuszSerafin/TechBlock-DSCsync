@@ -1,6 +1,5 @@
 package com.gmail.genek530.tbot.clientinterface;
 
-import com.gmail.genek530.tbot.clientinterface.modules.verification.PacketResponses;
 import com.gmail.genek530.tbot.commons.PyritePacket;
 import com.gmail.genek530.tbot.commons.ValidPackets;
 import io.github.thatkawaiisam.pyrite.packet.PacketContainer;
@@ -13,6 +12,16 @@ public class PacketHandler implements PacketContainer {
             return;
         }
         switch(packet.getValidPacket()){
+            case ValidPackets.getAllPlayersOnProxy:
+
+
+
+
+
+
+
+
+
             case ValidPackets.checkResponse:
                 PacketResponses.handleVerify((String) packet.getInformation());
         }
