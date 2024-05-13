@@ -1,7 +1,9 @@
 package com.gmail.genek530.minecraft;
 
 import com.gmail.genek530.Main;
+import com.gmail.genek530.minecraft.callbacks.BackEndServer;
 import com.gmail.genek530.minecraft.callbacks.CallBackResponse;
+import com.gmail.genek530.minecraft.callbacks.ProxyServer;
 import com.gmail.genek530.tbot.commons.PyritePacket;
 import com.google.gson.Gson;
 import io.github.thatkawaiisam.pyrite.Pyrite;
@@ -27,18 +29,29 @@ public class PacketRequests {
     }
 
 
-    public static void sendToSpecificClient(String destination, String action, String Data){
-        pyrite.sendPacket(new PyritePacket("coordinator", destination, action, Data), "TBOT");
+    public static void sendToSpecificProxy(ProxyServer proxy, String action, String Data){
+        pyrite.sendPacket(new PyritePacket("coordinator", proxy.getNameOfProxy(), action, Data), "TBOT");
+    }
+    public static void sendToSpecificProxy(ProxyServer proxy, BackEndServer backEndServer, String action, String Data){
+        pyrite.sendPacket(new PyritePacket("coordinator", proxy.getNameOfProxy(), backEndServer.getBackendName(), action, Data), "TBOT");
     }
 
-    public static UUID createCallback(String destination, String action, CallBackResponse callBackResponse){
-        Main.getLogger().info(String.format("Creating call back to %s", destination));
+    public static UUID createProxyCallback(ProxyServer destinationProxy, String action, CallBackResponse callBackResponse){
         UUID callBackUUID = UUID.randomUUID();
 
         callBacks.put(callBackUUID, callBackResponse);
-        pyrite.sendPacket(new PyritePacket("coordinator", destination, action, callBackUUID.toString()), "TBOT");
+        pyrite.sendPacket(new PyritePacket("coordinator", destinationProxy.getNameOfProxy(), action, callBackUUID.toString()), "TBOT");
         return callBackUUID;
     }
+
+    public static UUID createBackendCallback(ProxyServer destinationProxy, BackEndServer backEndServer, String action, CallBackResponse callBackResponse){
+        UUID callBackUUID = UUID.randomUUID();
+
+        callBacks.put(callBackUUID, callBackResponse);
+        pyrite.sendPacket(new PyritePacket("coordinator", destinationProxy.getNameOfProxy(), backEndServer.getBackendName(), action, callBackUUID.toString()), "TBOT");
+        return callBackUUID;
+    }
+
 
     //todo this will error
     public static void handOffDataToCallback(String onepacket){

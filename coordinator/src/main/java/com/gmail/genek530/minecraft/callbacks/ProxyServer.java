@@ -7,17 +7,20 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import javax.annotation.Nullable;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-//Null assume server offline
+//if this object is inacessible through minecraft manager it's assumed it's offline.
 public class ProxyServer {
 
     private String nameOfProxy;
 
     //todo this will contain another class at some point
-    private List<String> subServers = new ArrayList<>();
+    private List<BackEndServer> subServers = new ArrayList<>();
 
+    private Instant lastPingTime = Instant.now();
 
     public ProxyServer(String nameOfProxy){
         this.nameOfProxy = nameOfProxy;
@@ -37,7 +40,7 @@ public class ProxyServer {
     @Nullable
     private String createCallBackAndWaitResponse(String whatPacket){
         CallBackResponse responseWaiter = new CallBackResponse();
-        PacketRequests.createCallback(nameOfProxy, whatPacket, responseWaiter);
+        PacketRequests.createProxyCallback(this, whatPacket, responseWaiter);
 
         for (int i = 0; i < 30; i++) {
             if(responseWaiter.WasSet()) return responseWaiter.getData();
@@ -50,6 +53,18 @@ public class ProxyServer {
         return null;
     }
 
+    public boolean isExpired(){
+        if(Duration.between(lastPingTime, Instant.now()).toSeconds() > 120){
+            return true;
+        }
+        return false;
+    }
 
+    public void tick(){
+        lastPingTime = Instant.now();
+    }
 
+    public String getNameOfProxy() {
+        return nameOfProxy;
+    }
 }
