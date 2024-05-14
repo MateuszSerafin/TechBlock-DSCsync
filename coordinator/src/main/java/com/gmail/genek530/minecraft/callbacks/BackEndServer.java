@@ -9,14 +9,15 @@ import java.time.Instant;
 
 public class BackEndServer {
 
-    private ProxyServer underWhichProxy;
+    private ProxyServer responsibleProxy;
 
     private String backendName;
 
     private Instant lastPingTime;
 
-    public BackEndServer(){
-
+    public BackEndServer(ProxyServer responsibleProxy, String backendName){
+        this.responsibleProxy = responsibleProxy;
+        this.backendName = backendName;
     }
 
 
@@ -24,7 +25,7 @@ public class BackEndServer {
     @Nullable
     private String createCallBackAndWaitResponse(String whatPacket){
         CallBackResponse responseWaiter = new CallBackResponse();
-        PacketRequests.createBackendCallback(underWhichProxy, this, whatPacket, responseWaiter);
+        PacketRequests.createBackendCallback(responsibleProxy, this, whatPacket, responseWaiter);
 
         for (int i = 0; i < 30; i++) {
             if(responseWaiter.WasSet()) return responseWaiter.getData();

@@ -1,4 +1,6 @@
-package com.gmail.genek530.discord.configs;
+package com.gmail.genek530.minecraft.datatypes;
+
+import com.gmail.genek530.discord.configs.BotOptions;
 
 import java.util.ArrayList;
 import java.util.HashMap;

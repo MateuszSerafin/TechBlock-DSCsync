@@ -1,7 +1,7 @@
 package com.gmail.genek530;
 
 import com.gmail.genek530.discord.MainDiscordBot;
-import com.gmail.genek530.discord.configs.MainConfig;
+import com.gmail.genek530.minecraft.datatypes.MainConfig;
 import com.gmail.genek530.discord.configs.VerifyModuleConfig;
 import com.gmail.genek530.minecraft.PacketRequests;
 import com.gmail.genek530.minecraft.callbacks.ProxyServer;
@@ -36,9 +36,9 @@ public class Main {
         File moduleDir = new File(dataDir + "/modules/");
         if(!moduleDir.exists()) moduleDir.mkdir();
 
-        File mainConfigFile = new File(dataDir + "/main.yaml");
+        File mainConfigFile = new File(dataDir + "/minecraftside.yaml");
         if(!mainConfigFile.exists()){
-            Files.copy(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("main.yaml")), mainConfigFile.toPath());
+            Files.copy(Objects.requireNonNull(Main.class.getClassLoader().getResourceAsStream("minecraftside.yaml")), mainConfigFile.toPath());
             requireConfiguration = true;
         }
 

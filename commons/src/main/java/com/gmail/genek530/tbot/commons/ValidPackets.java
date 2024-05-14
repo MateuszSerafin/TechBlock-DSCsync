@@ -3,8 +3,8 @@ package com.gmail.genek530.tbot.commons;
 public class ValidPackets {
 
     //online status checking
-    public static final String alivePacket = "alivepacket";
-
+    public static final String alivePacketProxy = "alivepacketproxy";
+    public static final String alivePacketBackEnd = "alivepacketbackend";
 
 
     //TODO this should some how send data and check data it should be changed from enum or something

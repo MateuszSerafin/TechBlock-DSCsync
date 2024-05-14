@@ -6,7 +6,7 @@ public class PyritePacket extends Packet {
 
     private String sender;
     private String destinationProxy;
-    private String destinationBackEnd;
+    private String responsibleProxy;
 
 
     private String validPacket;
@@ -21,16 +21,16 @@ public class PyritePacket extends Packet {
     public PyritePacket(String sender, String destinationProxy, String validPacket, Object information){
         this.sender = sender;
         this.destinationProxy = destinationProxy;
-        this.destinationBackEnd = "N/A";
+        this.responsibleProxy = "N/A";
 
         this.validPacket = validPacket;
         this.information = information;
     }
 
-    public PyritePacket(String sender, String destinationProxy, String destinationBackEnd, String validPacket, Object information){
+    public PyritePacket(String sender, String destinationProxy, String responsibleProxy, String validPacket, Object information){
         this.sender = sender;
         this.destinationProxy = destinationProxy;
-        this.destinationBackEnd = destinationBackEnd;
+        this.responsibleProxy = responsibleProxy;
 
         this.validPacket = validPacket;
         this.information = information;
@@ -44,8 +44,8 @@ public class PyritePacket extends Packet {
         return destinationProxy;
     }
 
-    public String getDestinationBackEnd(){
-        return this.destinationBackEnd
+    public String getResponsibleProxy(){
+        return this.responsibleProxy;
     }
 
     public String getValidPacket() {

@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 //if this object is inacessible through minecraft manager it's assumed it's offline.
@@ -18,7 +19,7 @@ public class ProxyServer {
     private String nameOfProxy;
 
     //todo this will contain another class at some point
-    private List<BackEndServer> subServers = new ArrayList<>();
+    private HashMap<String, BackEndServer> subServers = new HashMap<>();
 
     private Instant lastPingTime = Instant.now();
 
@@ -66,5 +67,9 @@ public class ProxyServer {
 
     public String getNameOfProxy() {
         return nameOfProxy;
+    }
+
+    public HashMap<String, BackEndServer> getSubServers() {
+        return subServers;
     }
 }

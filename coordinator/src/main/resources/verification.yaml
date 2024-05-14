@@ -1,6 +1,43 @@
 #This bot requires permission for role adding and removing if permission module is used
 botToken: INVALID
 
+
+mainBot:
+  token: "INVALID"
+
+  #listening, playing, streaming, watching
+  activityName: "listening"
+
+  #todo add more messages
+  #${networkonline} <- updates every time amount of online players
+  #${discordonline} <- self explanatory
+  descriptions:
+    - "Currently online players: ${networkonline}"
+    - "Discord online ${discordonline}"
+
+  #changes description every X minutes
+  changeFrequency: 1
+
+
+
+proxyBots:
+  #case sensitive if you don't add it this server won't be checked if it's online.
+  openTech:
+    token: "INVALID"
+
+    #listening, playing, streaming, watching
+    activityName: "listening"
+
+    #todo add more messages
+    #${proxyonline}
+    descriptions:
+      - "Online on open tech ${proxyonline} players"
+      - "Nie wiem tutaj wez ktos daj cos fajnego"
+
+    #changes description every X minutes
+    changeFrequency: 1
+
+
 #listening, playing, streaming, watching
 #if activity is '' then it's not set
 activityName: Listening

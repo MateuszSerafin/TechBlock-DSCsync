@@ -13,6 +13,15 @@ public class PacketResponses implements PacketContainer {
             return;
         }
         switch(packet.getValidPacket()){
+
+            case ValidPackets.alivePacketProxy:
+                MinecraftManager.tickOrAddProxyServer(packet.getSender());
+                return;
+
+            case ValidPackets.alivePacketBackEnd:
+                MinecraftManager.tickOrAddBackEndServer(packet.getSender(), packet.getResponsibleProxy());
+
+
             case ValidPackets.callBackResponse:
                 PacketRequests.handOffDataToCallback((String) packet.getInformation());
                 return;
